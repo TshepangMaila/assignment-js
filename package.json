@@ -1,0 +1,11 @@
+{
+  "name": "graduate-assessment",
+  "version": "1.0.0",
+  "description": "Graduate Assessment",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Themba Makamu",
+  "license": "ISC"
+}
