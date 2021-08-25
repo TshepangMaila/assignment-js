@@ -35,30 +35,9 @@ let partnerOne = "Themba",partnerTwo = "Thabiso";
 
                 }
 
-                // console.log(counted[i]);
-
-                
-
             }
 
-            // Calculate The Match Percentage
-            let matchPercentage = 0;
-            let j = res.length - 1;
-            let sum = "";
-
-            for(let i = 0; i < res.length/2; i++){
-
-                sum += parseInt(res[i]) + parseInt(res[j - i]);
-
-                if(res.length % 2 === 1 && i === res.length/2){
-
-                    sum += res[i + 1];
-
-                }
-
-            }
-
-            console.log(sum);
+            console.log(calcPercentage(res));
 
         }else{
 
@@ -75,3 +54,38 @@ let partnerOne = "Themba",partnerTwo = "Thabiso";
 
 
 })(partnerOne,partnerTwo);
+
+function calcPercentage(res){
+
+    if(res.length === 1 || res.length === 2){
+
+        return res;
+
+    }else{
+
+        // Calculate The Match Percentage
+        let j = res.length - 1;
+        let sum = "";
+
+        for(let i = 0; i < res.length/2; i++){
+
+            sum += parseInt(res[i]) + parseInt(res[j]);
+
+            if(res.length % 2 === 1 && i === res.length/2){
+
+                sum += res[i + 1];
+
+            }
+            j--;
+
+        }
+
+        res = sum;
+        return calcPercentage(res);
+
+        
+
+    }
+
+}
+console.log(calcPercentage("123456"));
