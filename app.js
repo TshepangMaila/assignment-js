@@ -44,14 +44,21 @@ let partnerOne = "Themba",partnerTwo = "Thabiso";
             // Calculate The Match Percentage
             let matchPercentage = 0;
             let j = res.length - 1;
+            let sum = "";
 
             for(let i = 0; i < res.length/2; i++){
 
-                let sum = parseInt(res[i]) + parseInt(res[j - i]);
-                console.log(res);
-                // console.log(sum);
+                sum += parseInt(res[i]) + parseInt(res[j - i]);
+
+                if(res.length % 2 === 1 && i === res.length/2){
+
+                    sum += res[i + 1];
+
+                }
 
             }
+
+            console.log(sum);
 
         }else{
 
