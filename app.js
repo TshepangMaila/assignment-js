@@ -1,7 +1,70 @@
-let http = require('http');
+/* 
+Coder       : Themba Makamu (Kamzen)
+Date        : 25 Aug 2021
+Description : Club Matching Members
 
-let server = http.createServer((req,res)=>{
+*/
 
-});
+let partnerOne = "Themba",partnerTwo = "Thabiso";
 
-server.listen(8080);
+//Anonymous Function For Matching Algorithm
+((partnerOne,partnerTwo)=>{
+
+    //Try Catch Block To Validate If Input Names Are In Correct Format
+    try{
+
+        //Check If The Input Names Are Only Alphabetical Characters
+        if(/^[a-zA-Z]+$/.test(partnerOne) && /^[a-zA-Z]+$/.test(partnerTwo)){
+
+            let matchSentence = (partnerOne + " Matches " + partnerTwo).toLowerCase();
+            let res = "";
+
+            const counted = [];
+
+            for( let i = 0; i < matchSentence.length; i++){
+                
+
+                if(counted.includes(matchSentence[i]) || matchSentence[i] === " "){
+
+                    continue;
+
+                }else{
+
+                    res += matchSentence.split(matchSentence[i]).length - 1;
+                    counted[i] = matchSentence[i];
+
+                }
+
+                // console.log(counted[i]);
+
+                
+
+            }
+
+            // Calculate The Match Percentage
+            let matchPercentage = 0;
+            let j = res.length - 1;
+
+            for(let i = 0; i < res.length/2; i++){
+
+                let sum = parseInt(res[i]) + parseInt(res[j - i]);
+                console.log(res);
+                // console.log(sum);
+
+            }
+
+        }else{
+
+            //Throws A Error Message 
+            throw "Only Alphabetical Characters Are Allowed On Names.";
+
+        }
+
+    }catch(err){
+
+        console.log(err);
+
+    }
+
+
+})(partnerOne,partnerTwo);
