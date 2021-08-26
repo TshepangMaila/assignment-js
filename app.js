@@ -5,94 +5,114 @@ Description : Club Matching Members
 
 */
 
-let partnerOne = "Themba",partnerTwo = "Thabiso";
+const reader = require('./reader.js');
 
-//Anonymous Function For Matching Algorithm
-((partnerOne,partnerTwo)=>{
+((r) => {
 
-    //Try Catch Block To Validate If Input Names Are In Correct Format
-    try{
+    let matcher = (male, female) => {
 
-        //Check If The Input Names Are Only Alphabetical Characters
-        if(/^[a-zA-Z]+$/.test(partnerOne) && /^[a-zA-Z]+$/.test(partnerTwo)){
+        //Try Catch Block To Validate If Input Names Are In Correct Format
+        try{
 
-            let matchSentence = (partnerOne + " Matches " + partnerTwo).toLowerCase();
-            let res = "";
+            //Check If The Input Names Are Only Alphabetical Characters
+            if(/^[a-zA-Z]+$/.test(male) && /^[a-zA-Z]+$/.test(female)){
 
-            const counted = [];
+                let matchSentence = `${male} matches ${female}`
+                let res = "";
+                const counted = [];
 
-            for( let i = 0; i < matchSentence.length; i++){
-                
+                for( let i = 0; i < matchSentence.length; i++){
 
-                if(counted.includes(matchSentence[i]) || matchSentence[i] === " "){
+                    if(!counted.includes(matchSentence[i]) || matchSentence[i] !== ""){
 
-                    continue;
+                        res += matchSentence.split(matchSentence[i]).length - 1;
+                        counted[i] = matchSentence[i];
 
-                }else{
+                    }
+                    
 
-                    res += matchSentence.split(matchSentence[i]).length - 1;
-                    counted[i] = matchSentence[i];
+                    // if(counted.includes(matchSentence[i]) || matchSentence[i] === " "){
+                    //     continue;
+                    // }else{
+                    //     res += matchSentence.split(matchSentence[i]).length - 1;
+                    //     counted[i] = matchSentence[i];
+                    // }
 
                 }
 
+                console.log(calcPercentage(res));
+
+            }else{
+
+                //Throws A Error Message 
+                throw "Only Alphabetical Characters Are Allowed On Names.";
+
             }
 
-            console.log(calcPercentage(res));
+        }catch(err){
 
+            console.log(err);
+
+        }
+
+    }
+
+    let calcPercentage = (res) => {
+
+        console.log(res);
+    
+        if(res.length === 1 || res.length === 2){
+    
+            return res;
+    
         }else{
-
-            //Throws A Error Message 
-            throw "Only Alphabetical Characters Are Allowed On Names.";
-
-        }
-
-    }catch(err){
-
-        console.log(err);
-
-    }
-
-
-})(partnerOne,partnerTwo);
-
-function calcPercentage(res){
-
-    console.log(res);
-
-    if(res.length === 1 || res.length === 2){
-
-        return res;
-
-    }else{
-
-        // Calculate The Match Percentage
-        let j = res.length -1;
-        let sum = "";
-
-        for(let i = 0; i < res.length/2; i++){
-
-            
-
-            if(i < res.length/2 && j > res.length/2){
-
-                sum += parseInt(res[i]) + parseInt(res[j]);
-                j--;
-                
-
-            }else if(res.length % 2 ===1 && i === res.length/2){
-
-                sum += res[i + 1]; 
-
+    
+            // Calculate The Match Percentage
+            let j = res.length -1;
+            let sum = "";
+    
+            for(let i = 0; i < res.length/2; i++){
+    
+                if(i < res.length/2 && j > res.length/2){
+    
+                    sum += parseInt(res[i]) + parseInt(res[j]);
+                    j--;
+                    
+                }else if(res.length % 2 ===1 && i === res.length/2){
+    
+                    sum += res[i + 1]; 
+    
+                }
+    
             }
+    
+            res = sum;
+            return calcPercentage(res);
 
         }
-
-        res = sum;
-        return calcPercentage(res);
-
-        
-
+    
     }
 
-}
-console.log(calcPercentage("1234567"));
+    r.Streamer(players => {
+
+        console.log(players.males)
+        console.log(players.females)
+
+        players.males.forEach(male => {
+
+            players.females.forEach(female => {
+
+                matcher(male, female)
+
+            })
+
+        })
+    
+    })
+
+})(reader);
+
+// let partnerOne = "Themba",partnerTwo = "Thabiso";
+// ((partnerOne,partnerTwo)=>{
+// })(partnerOne,partnerTwo);
+// console.log(calcPercentage("1234567"));
