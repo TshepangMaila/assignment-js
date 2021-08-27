@@ -6,8 +6,9 @@ Description : Club Matching Members
 */
 
 const reader = require('./reader.js');
+const writer = require('./writer.js');
 
-((r) => {
+((r, w) => {
 
     let matcher = (male, female) => {
 
@@ -51,7 +52,9 @@ const reader = require('./reader.js');
 
         }catch(err){
 
-            console.log(err);
+            const errWriter = new w.CsvWriter("log.csv", [{id: "log"}], true)
+
+            errWriter.logError(`[${male}]-[${female}] :- ${err.toString()}`)
 
         }
 
@@ -110,7 +113,7 @@ const reader = require('./reader.js');
     
     })
 
-})(reader);
+})(reader, writer);
 
 // let partnerOne = "Themba",partnerTwo = "Thabiso";
 // ((partnerOne,partnerTwo)=>{
